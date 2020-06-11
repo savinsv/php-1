@@ -68,9 +68,15 @@
     
     //Функция транслитеррации
     function smTranslit($text){
-        $base = ['а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>"'"];
+        $base = ['а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>"'",' '=>' ','-'=>'-','_'=>'_','!'=>'!','?'=>'?'];
         $text = mb_strtolower($text);
-        $text = strtr($text,$base);
+        $chars = preg_split('//u',$text, -1, PREG_SPLIT_NO_EMPTY);
+        $text='';
+        for ($i = 0;$i<count($chars);$i++){
+           $text .= $base[$chars[$i]];
+        };
+    //Так без цикла заменим все    
+   //     $text = strtr($text,$base);
         return $text;
     };
 
@@ -83,8 +89,38 @@
         return $data;
     };
 
-    //
+    //Функция вывода задания5
     function showTask5($text){
-        
+        $data = '<div><h2>Задание 5</h2><br>';
+        $data .= 'Введенный текст: ' .$text .'<br>';
+        $data .= 'Перекодированный текст: ' .str_replace(' ','_',$text);
+        $data .= '</div><br><hr>';
+        return $data;
+    };
+
+    //Функция формирования меню Задание №6
+    function appendmenu($menuArray){
+        $data = '<ul>';
+        foreach ($menuArray as $key => $val){
+            $data .= '<li><a href="#"><span>' .$key .'</span></a>';
+            if (count($val)>0){
+                $data .= '<ul>';
+                foreach ($val as $value){
+                    $data .= '<li><a href="#"><span>' .$value .'</span></a></li>';
+                };
+                $data .= '</ul>';
+            };
+            $data .= '</li>';
+        };
+        $data .='</ul>';
+        return $data;
+    };
+
+    //Функция вывода задания 7
+    function showTask7(){
+        $data = '<div><h2>Задание 7</h2><br>';
+        for ($i = 0;$i <= 9;$data .=$i.' ',$i++);
+        $data .= '</div><br><hr>';
+        return $data;
     };
 ?>
