@@ -1,0 +1,39 @@
+<div class="products">
+    <?php
+            function check_ext($ext,$array_exts){
+                if (($ext !=='') and (is_array($array_exts)) and (count($array_exts)>0)){
+                    return in_array($ext,$array_exts);
+                };
+            };
+
+            function get_ext($filename) {
+                return substr(strrchr($filename,'.'),1);
+            };
+//            
+            function get_files($files_path,$exts) {
+                $files = [];
+                if (is_dir($files_path)) {
+                    $images = dir($files_path);
+                    while (false !== ($entry = $images->read())){
+                        $ext = mb_strtolower(get_ext($entry));
+                        if ($entry !== '.' and $entry !== '..' and check_ext($ext,$exts)) {
+                            $files[] = $entry;
+                        }; 
+                    };
+                };
+                return $files;
+            };
+
+            $exts = ['jpg','png','gif'];
+            $file_list = get_files($rootDir ."/img",$exts);
+            //var_dump($file_list);
+
+            foreach ($file_list as $key => $file) {
+                $data = '<div class="products-item">';
+                $data .= '<h2 class="head">Картинка '. ($key+1) .'</h2>';
+                $data .= '<div class="imgbox"><a href="'."../img/".$file.'" target="_blank"><img src='."../img/".$file .' alt="product '.($key+1) .'" class="img"></a></div>';
+                $data .= '</div>';
+                echo $data;
+            };
+        ?>
+</div>
