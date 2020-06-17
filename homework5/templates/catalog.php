@@ -24,24 +24,26 @@
                 return $files;
             };
  */
-        //    $link = mysqli_connect('localhost', 'gvido','itsmylife','gb_base');
-        //    var_dump($link);
+            $link = mysqli_connect('localhost', 'gvido','itsmylife');
+            var_dump(mysqli_select_db($link,'gb_base'));
+            var_dump(mysqli_query($link,'check TABLE images;'));
+            //var_dump($link);
             
-            $exts = ['jpg','png','gif'];
-            $file_list = get_files($rootDir ."/img",$exts);
-            //var_dump($file_list);
-
+        //    $exts = ['jpg','png','gif'];
+            $file_list = get_files(/*$rootDir*/ "./img",exts);
+      //      var_dump($file_list);
+           // exit;
             foreach ($file_list as $key => $file) {
                 //var_dump(getimagesize($rootDir ."/img/".$file)); 
                 $data = '<div class="products-item">';
 
-                $data .= round((filesize($rootDir ."/img/".$file)/1024),2,PHP_ROUND_HALF_UP). ' Kb<br>';
-                $w_h = getimagesize($rootDir ."/img/".$file);
+                $data .= round((filesize(/*$rootDir ."/img/". */$file)/1024),2,PHP_ROUND_HALF_UP). ' Kb<br>';
+                $w_h = getimagesize(/*$rootDir ."/img/". */$file);
                 $data .= 'width: ' .$w_h[0]."\t";
                 $data .= 'height: ' .$w_h[1];
 
                 $data .= '<h2 class="head">Картинка '. ($key+1) .'</h2>';
-                $data .= '<div class="imgbox"><a href="'."../img/".$file.'" target="_blank"><img src='."../img/".$file .' alt="product '.($key+1) .'" class="img"></a></div>';
+                $data .= '<div class="imgbox"><a href="'/*."../img/" */.$file.'" target="_blank"><img src='/*."../img/" */.$file .' alt="product '.($key+1) .'" class="img"></a></div>';
                 $data .= '</div>';
                 echo $data;
             };
