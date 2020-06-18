@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+.product {
+  margin: 40px;
+}
+  .products {
+    margin-top: 20px;
+    padding: 20px;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+  .imgbox >a>img {
+      width: 240px;
+  }
