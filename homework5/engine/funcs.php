@@ -1,4 +1,8 @@
 <?php
+    $user = "gvido";
+    $passwd = "itsmylife";
+    
+
     define('exts',['jpg','png','gif']);
     function check_ext($ext,$array_exts){
         if (($ext !=='') and (is_array($array_exts)) and (count($array_exts)>0)){
@@ -23,5 +27,12 @@
         };
         return $files;
     };
-    
+   function create_db($link,$dbName){
+    if (!($link and $dbName)){
+        return false;
+    } else {
+        mysqli_query($link,"CREATE DATABASE $dbName;");
+        return mysqli_errno($link) === 0 ? true : false;
+    };
+   };
 ?>
