@@ -9,6 +9,7 @@
 ?>
 <body>
     <?php
+        phpinfo();
        // var_dump(scandir('img'));
         require_once $rootDir.'/templates/catalog.php';
     ?>
